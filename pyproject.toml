@@ -1,0 +1,107 @@
+[project]
+name = "gt_fund"
+requires-python = "==3.11.4"
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "alembic/*",  # Ignore all Python files in the alembic directory and its subdirectories
+]
+preview = true
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/  - to check error codes
+select = [
+    "F",  # pyflakes
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "I",  # isort
+    "N",  # pep8-naming
+    "D",  # pydocstyle
+    "UP",  # pyupgrade
+    "ANN",  # flake8-annotations
+    "ASYNC",  # flake8-async
+    "S",  # flake8-bandit
+    "BLE",  # flake8-blind-except
+    "B",  # flake8-bugbear
+    "A",  # flake8-builtins
+    "COM", # flake8-commas
+    "C4",  # flake8-comprehensions
+    "EM",  # flake8-errmsg
+    "ISC",  # flake8-implicit-str-concat
+    "ICN",  # flake8-import-conventions
+    "LOG",  # flake8-logging
+    "G",  # flake8-logging-format
+    "PIE", # flake8-pie
+    "T20",  # flake8-print
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SLF",  # flake8-self
+    "SLOT",  # flake8-slots
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+    "INT",  # flake8-gettext
+    "ARG",  # flake8-unused-arguments
+    "TD",  # flake8-todos
+#    "ERA",  # eradicate  # TODO @Renat: switch it on to find all commented code if needed
+    "PL",  # Pylint
+    "FLY",  # flyint
+    "FAST",  # FastAPI
+    "PERF",  # Perflint
+    "FURB",  # refurb
+    "RUF",  # Ruff-specific rules
+]
+ignore = [
+    "N805",  # First argument of a method should be named `self`
+
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D105",  # Missing docstring in magic method
+    "D106",  # Missing docstring in public nested class
+    "D107",  # Missing docstring in __init__
+    "D203",  # 1 blank line required before class docstring
+    "D212",  # Multi-line docstring summary should start at the first line
+    "D401",  # First line of docstring should be in imperative mood: "{first_line}"
+
+    "COM812",  # Trailing comma missing
+
+    "G004",  # Logging statement uses f-string
+
+    "ANN002",  # Missing type annotation for args
+    "ANN003",  # Missing type annotation for kwargs
+    "ANN101",  # Missing type annotation for self in method
+    "ANN102",  # Missing type annotation for cls in classmethod
+
+    "ISC001",  # Implicitly concatenated string literals on one line
+
+    "TD003",  # Missing issue link on the line following this TO DO
+
+    "PLR0904",  # Too many public methods (21 > 20)
+    "PLR0913",  # Too many arguments in function definition
+    "PLR0917",  # Too many positional arguments
+
+    "FAST001",  # FastAPI route with redundant response_model argument
+
+    "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S",  # Bandit checks in tests
+    "ANN",  # Annotations in tests
+    "ARG",  # Unused arguments in tests
+    "TD",  # TO DO in tests
+    "PL",  # Pylint in tests
+    "RUF",  # Ruff-specific rules in tests
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+indent-style = "space"
+quote-style = "double"
+
