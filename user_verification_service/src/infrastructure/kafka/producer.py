@@ -54,7 +54,7 @@ class KafkaEventPublisher(IEventPublisher):
             self.logger.error(f"Batch publish had {len(failures)} failures")
             raise Exception("Batch publish partially failed")
 
-    async def close(self):
+    async def close(self) -> None:
         """Cleanup resources."""
         if self._producer is not None:
             await self._producer.stop()
