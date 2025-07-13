@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI):
 
     logger.info("Shutting down User Verification Service")
 
-    await app.state.kafka_publisher.close()
+    await app.state.kafka_publisher.xclose()
     await app.state.db_connection.engine.dispose()
 
 

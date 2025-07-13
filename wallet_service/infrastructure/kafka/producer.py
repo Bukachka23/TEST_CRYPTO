@@ -34,26 +34,18 @@ class KafkaEventPublisher(IEventPublisher):
         """Publish wallet.created event to Kafka."""
         producer = await self._get_producer()
         message = event.to_kafka_message()
-        try:
-            await producer.send_and_wait(
-                topic=self.settings.kafka_topic_wallet_created,
-                **message,
-            )
-        except Exception as e:
-            self.logger.error(f"Failed to publish wallet.created event: {e}")
-            raise
+        await producer.send_and_wait(topic=self.settings.kafka_topic_wallet_created, **message)
 
     async def publish_batch(self, events: list[WalletCreatedEvent]) -> None:
         """Publish batch of wallet.created events to Kafka."""
         producer = await self._get_producer()
         tasks = []
+
         for event in events:
             message = event.to_kafka_message()
-            future = producer.send(
-                topic=self.settings.kafka_topic_wallet_created,
-                **message,
-            )
+            future = producer.send(topic=self.settings.kafka_topic_wallet_created, **message)
             tasks.append(future)
+
         results = await asyncio.gather(*tasks, return_exceptions=True)
         errors = [r for r in results if isinstance(r, Exception)]
         if errors:
